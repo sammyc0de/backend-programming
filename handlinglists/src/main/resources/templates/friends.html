@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>Friends</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	</head>
+	<body>
+        <h1>My friends</h1>
+   <thead>
+        <tr>
+            <th><b>Name</b></th>
+        </tr>
+    </thead>
+        <table>
+            <tr th:each="friend : ${friends}">
+                <td th:text="${friend.firstName}"></td>
+                <td th:text="${friend.lastName}"></td>
+            </tr>
+        </table> 
+ <h2>Add new friend to list</h2>
+    <form action="#" th:action="@{/saveFriend}" th:object="${friend}" method="post">
+      <table>
+        <tr>
+          <td>First name: <input type="text" th:field="*{firstName}" /></td>
+          <td>Last name: <input type="text" th:field="*{lastName}" />
+          <input type="submit" value="Add friend" />
+        </td>
+        </tr>
+      </table>
+    </form> 
+	</body>
+</html>
