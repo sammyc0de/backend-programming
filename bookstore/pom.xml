@@ -51,8 +51,36 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
-	</dependencies>
 
+		<!-- DATABASE-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency> 		
+
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
+		<!-- a new dependency for h2-console -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-h2console</artifactId>
+		</dependency>
+		
+		<!-- new test dependencies -->	
+
+		<dependency>
+    		<groupId>org.springframework.boot</groupId>
+    		<artifactId>spring-boot-starter-test</artifactId>
+    		<scope>test</scope>
+		</dependency>
+
+
+	</dependencies>
+	
 	<build>
 		<plugins>
 			<plugin>

@@ -1,16 +1,23 @@
 package syksy26.bookstore.domain;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
+
+@Entity
 public class Book {
 
-    private String title;
-    private String author;
-    private int publicationYear;
-    private String isbn;
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private long id;
+    private String title, author, isbn;
+    private int publicationYear;   
     private double price;
 
 
-    public Book() {
+    public Book(String string, String string2, String string3, int i, double d) {
 
     }
 
@@ -21,6 +28,15 @@ public class Book {
         this.isbn = isbn;
         this.price = price;
     }
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 
     public String getTitle() {
         return title;
@@ -41,5 +57,10 @@ public class Book {
     public double getPrice() {
         return price;
     }
+
+    @Override
+	public String toString() {
+		return "Book id=" + id + ", title=" + title + ",author=" + author;
+	}
 
 }
