@@ -16,7 +16,7 @@ import syksy26.bookstore.domain.BookRepository;
 @Controller
 public class BookController {
 
-    private final BookRepository repository;
+    private BookRepository repository;
 
     public BookController(BookRepository repository) {
         this.repository = repository;
@@ -25,18 +25,18 @@ public class BookController {
     public static final List<Book> books = new ArrayList<>();
 
   
-    @GetMapping("/index")
+    @GetMapping("/bookList")
     public String showBooks(Model model) {
         model.addAttribute("books", repository.findAll());
         return "bookList";
     }
 
-    @PostMapping("/save")
+     @PostMapping("/saveBook")
     public String saveBookToList(@ModelAttribute Book kirja) {
         books.add(kirja);
         return "redirect:/book";
     }
-
+ 
 
 
 }

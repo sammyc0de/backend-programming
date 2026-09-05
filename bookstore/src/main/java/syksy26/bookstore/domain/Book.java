@@ -16,8 +16,7 @@ public class Book {
     private int publicationYear;   
     private double price;
 
-
-    public Book(String string, String string2, String string3, int i, double d) {
+    public Book() {
 
     }
 
@@ -62,5 +61,5 @@ public class Book {
 	public String toString() {
 		return "Book id=" + id + ", title=" + title + ",author=" + author;
 	}
-
+ 
 }
