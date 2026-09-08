@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
 import syksy26.bookstore.domain.BookRepository;
+import syksy26.bookstore.domain.CategoryRepository;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -18,9 +19,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class BookController {
 
     private BookRepository repository;
+    private CategoryRepository categoryRepository;
 
-    public BookController(BookRepository repository) {
+    public BookController(BookRepository repository, CategoryRepository categoryRepository) {
         this.repository = repository;
+        this.categoryRepository = categoryRepository;
     }
 
     public static final List<Book> books = new ArrayList<>();
@@ -35,6 +38,7 @@ public class BookController {
    @RequestMapping(value = "/add")
     public String add(Model model) {
         model.addAttribute("book", new Book());
+        model.addAttribute("categories", categoryRepository.findAll());
         return "addBook";
     }
 
@@ -52,6 +56,7 @@ public class BookController {
     @RequestMapping(value = "/edit/{id}")
     public String edit(@PathVariable("id") Long bookId, Model model) {
         model.addAttribute("book", repository.findById(bookId));
+        model.addAttribute("categories", categoryRepository.findAll());
         return "editBook";
     }
     
