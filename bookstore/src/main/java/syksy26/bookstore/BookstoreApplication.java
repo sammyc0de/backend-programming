@@ -43,7 +43,7 @@ public class BookstoreApplication {
 			Book book2 = new Book("Nature Book", "Philip Downing", 2021, "358756-48", 19.90, category1);
 			bookRepository.save(book2); */
 
-			
+		
 
 		}; 
 

@@ -8,12 +8,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import syksy26.bookstore.domain.Book;
 import syksy26.bookstore.domain.BookRepository;
 
-@RestController 
+@RestController
 public class BookRestController {
 
     private final BookRepository bookRepository;
@@ -23,12 +24,18 @@ public class BookRestController {
        
     }
 
+    @RequestMapping(value="/booklist")
+    public String bookList(BookRepository bookRepository) {	        
+        return "bookList";
+    }
+  
+
 	@GetMapping("/books")
     public Iterable<Book> findAllBooks() {
         return bookRepository.findAll();
     }
     
-    @GetMapping("/books/{id}")
+    @GetMapping("/book/{id}")
     public Optional<Book> findById(@PathVariable("id") Long bookId) {
         return bookRepository.findById(bookId);
     }

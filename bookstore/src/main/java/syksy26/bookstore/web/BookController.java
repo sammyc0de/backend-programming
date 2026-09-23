@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import syksy26.bookstore.domain.Book;
+
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
@@ -47,7 +49,8 @@ public class BookController {
         repository.save(book);
         return "redirect:/bookList";
     }
- 
+
+    @PreAuthorize("hasRole('ADMIN')") //Only user with admin role can delete
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public String delete(@PathVariable("id") Long bookId, Model model) {
         repository.deleteById(bookId);
@@ -60,6 +63,9 @@ public class BookController {
         return "editBook";
     }
     
-
+    @RequestMapping(value="/login")
+        public String login() {
+            return "loginPage";
+        } 
 
 }
