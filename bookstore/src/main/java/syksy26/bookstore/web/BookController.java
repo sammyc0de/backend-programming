@@ -50,7 +50,7 @@ public class BookController {
         return "redirect:/bookList";
     }
 
-    @PreAuthorize("hasRole('ADMIN')") //Only user with admin role can delete
+    @PreAuthorize("hasAuthority('ADMIN')") //Only user with admin role can delete
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public String delete(@PathVariable("id") Long bookId, Model model) {
         repository.deleteById(bookId);
