@@ -28,7 +28,9 @@ public class BookstoreApplication {
 	private static final Logger log = LoggerFactory.getLogger(BookstoreApplication.class);
 
 	//Demo data tietokantaan
-    @Bean
+	//Kommentoitu pois käytöstä jotta testit menevät läpi
+
+/*     @Bean
 	public CommandLineRunner demo(BookRepository bookRepository, CategoryRepository categoryRepository, AppUserRepository userRepository ) {
 	return (args) -> {
 
@@ -53,19 +55,10 @@ public class BookstoreApplication {
 			log.info("fetch all users");
 			for (AppUser user : userRepository.findAll()) {
 				log.info(user.toString());
-			}
-
-
-
-			/* Book book1 = new Book("Example Book", "Robert Author", 2026, "9780156-48", 29.90, category2);
-			bookRepository.save(book1);
-			Book book2 = new Book("Nature Book", "Philip Downing", 2021, "358756-48", 19.90, category1);
-			bookRepository.save(book2); */
-
-		
+			}		
 
 		}; 
 
-	}
+	} */
 
 }
