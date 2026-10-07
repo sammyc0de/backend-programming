@@ -1,11 +1,12 @@
 package syksy26.bookstore;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
 
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+/* import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 
 import syksy26.bookstore.domain.Book;
@@ -15,7 +16,7 @@ import syksy26.bookstore.domain.Category;
 import syksy26.bookstore.domain.CategoryRepository;
 
 import syksy26.bookstore.domain.AppUser;
-import syksy26.bookstore.domain.AppUserRepository;
+import syksy26.bookstore.domain.AppUserRepository; */
 
 
 @SpringBootApplication
@@ -25,7 +26,7 @@ public class BookstoreApplication {
 		SpringApplication.run(BookstoreApplication.class, args);
 	}
 
-	private static final Logger log = LoggerFactory.getLogger(BookstoreApplication.class);
+	//private static final Logger log = LoggerFactory.getLogger(BookstoreApplication.class);
 
 	//Demo data tietokantaan
 	//Kommentoitu pois käytöstä jotta testit menevät läpi

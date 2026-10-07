@@ -120,6 +120,15 @@
 		<scope>test</scope>
 		</dependency>
 
+<!-- ulkoinen kanta postgresql -->	
+
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
+
 	</dependencies>
 
 	
