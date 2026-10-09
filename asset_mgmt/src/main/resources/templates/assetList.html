@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>Asset management</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	</head>
+	<body>
+        <h1>Asset management</h1>		
+    <table>
+        <tr>
+            <th><b>Vendor</b></th>
+			<th><b>Model</b></th>
+			<th><b>Description</b></th>
+			<th><b>Operating System</b></th>
+            <th><b>Hostname</b></th>
+        </tr>    
+            <tr th:each="asset : ${assets}">
+            <td th:text="${asset.vendor}"></td>
+            <td th:text="${asset.model}"></td>
+            <td th:text="${asset.description}"></td>
+            <td th:text="${asset.OS}"></td>
+            <td th:text="${asset.hostname}"></td>
+        </tr>
+    </table> 
+
+	</body>
+</html>
