@@ -6,7 +6,9 @@
         <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href=@{/css/bootstrap.min.css} />
 	</head>
 	<body>
-        <h1>Asset management</h1>		
+    <div class="ms-3"> 
+        <h1>Asset management</h1>	
+        <a href="/add" class="btn btn-primary mb-3">Add asset</a>	
     <table class="table table-striped">
         <tr>
             <th><b>Vendor</b></th>
@@ -14,6 +16,7 @@
 			<th><b>Description</b></th>
 			<th><b>Operating System</b></th>
             <th><b>Hostname</b></th>
+            <th><b>Category</b></th>
         </tr>    
             <tr th:each="asset : ${assets}">
             <td th:text="${asset.vendor}"></td>
@@ -21,8 +24,10 @@
             <td th:text="${asset.description}"></td>
             <td th:text="${asset.OS}"></td>
             <td th:text="${asset.hostname}"></td>
+            <td th:text="${asset.category.name}"></td>
         </tr>
     </table> 
-
+      
+    </div>
 	</body>
 </html>

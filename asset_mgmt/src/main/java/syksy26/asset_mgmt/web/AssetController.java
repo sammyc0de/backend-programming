@@ -9,26 +9,38 @@ import org.springframework.ui.Model;
 
 import syksy26.asset_mgmt.domain.Asset;
 import syksy26.asset_mgmt.domain.AssetRepository;
+import syksy26.asset_mgmt.domain.CategoryRepository;
 
 @Controller
 public class AssetController {
   
     private AssetRepository repository;
+    private CategoryRepository categoryRepository;
 
     //constructor
-    public AssetController(AssetRepository repository) {
+    public AssetController(AssetRepository repository, CategoryRepository categoryRepository) {
         this.repository = repository;
+        this.categoryRepository = categoryRepository;
     }
 
+    //Mapping requests
 
-    //HTTP GET request, read all assets
+    //HTTP Get request, read all assets
     @GetMapping("/")
     public String showAssets(Model model) {
-        model.addAttribute("assets", repository.findAll());
+        model.addAttribute("assets", repository.findAll());        
         return "assetList";
     }
+    
+    //HTTP Get request, go to add form
+    @GetMapping("/add")
+    public String showAddForm(Model model) {
+        model.addAttribute("asset", new Asset());
+        model.addAttribute("categories", categoryRepository.findAll());
+        return "assetAdd";
+    }
 
-    //Post request, save new asset
+    //HTTP Post request, save new asset
     @PostMapping("/save")
     public String saveAsset(@ModelAttribute Asset asset) {
         repository.save(asset);
