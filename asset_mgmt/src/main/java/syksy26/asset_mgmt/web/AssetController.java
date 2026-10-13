@@ -4,7 +4,9 @@ package syksy26.asset_mgmt.web;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.ui.Model;
 
 import syksy26.asset_mgmt.domain.Asset;
@@ -23,7 +25,7 @@ public class AssetController {
         this.categoryRepository = categoryRepository;
     }
 
-    //Mapping requests
+    //HTTP mapping annotations
 
     //HTTP Get request, read all assets
     @GetMapping("/")
@@ -47,5 +49,18 @@ public class AssetController {
         return "redirect:/";
     }
    
+    //HTTP request for editing item
+    @RequestMapping(value = "/edit/{id}")
+    public String edit(@PathVariable("id") Long assetId, Model model) {
+        model.addAttribute("asset", repository.findById(assetId));
+        model.addAttribute("categories", categoryRepository.findAll());
+        return "assetEdit";
+    }
+
+    //HTTP request for delelte item
+    @RequestMapping(value = "/delete/{id}")
+    public String delete(@PathVariable("id") Long assetId, Model model) {
+        repository.deleteById(assetId);
+        return "redirect:../";    }
     
 }

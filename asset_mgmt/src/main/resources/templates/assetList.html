@@ -17,6 +17,8 @@
 			<th><b>Operating System</b></th>
             <th><b>Hostname</b></th>
             <th><b>Category</b></th>
+            <th></th>
+            <th></th>
         </tr>    
             <tr th:each="asset : ${assets}">
             <td th:text="${asset.vendor}"></td>
@@ -24,7 +26,9 @@
             <td th:text="${asset.description}"></td>
             <td th:text="${asset.OS}"></td>
             <td th:text="${asset.hostname}"></td>
-            <td th:text="${asset.category.name}"></td>
+            <td th:text="${asset.category.name}"></td>     
+            <td><a th:href="@{/edit/{id}(id=${asset.id})}" class="btn btn-primary">Edit</a></td>       
+            <td><a th:href="@{/delete/{id}(id=${asset.id})}" class="btn btn-danger">Delete</a></td> 
         </tr>
     </table> 
       
