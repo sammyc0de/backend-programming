@@ -6,6 +6,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.CascadeType;
 
 
 @Entity
@@ -20,17 +22,19 @@ public class Asset {
     private String OS;
     private String hostname;
 
-    //Maintenance log will be added later
-
     @ManyToOne
     @JoinColumn(name = "categoryid")
     private Category category;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "maintenancelogid")
+    private MaintenanceLog maintenanceLog;
    
     public Asset() {
         
     }
 
-    public Asset(String vendor, String model, String description, String OS, String hostname, Category category) {
+    public Asset(String vendor, String model, String description, String OS, String hostname, Category category, MaintenanceLog maintenanceLog) {
         super();
         this.vendor = vendor;
         this.model = model;
@@ -38,6 +42,9 @@ public class Asset {
         this.OS = OS;
         this.hostname = hostname;
         this.category = category;
+        this.maintenanceLog = maintenanceLog;
+      
+
     }
 
     public Long getId() {
@@ -96,6 +103,14 @@ public class Asset {
 		this.category = category;
 	}
 
+    public MaintenanceLog getMaintenanceLog() {
+		return maintenanceLog;
+	}
+
+	public void setMaintenanceLog(MaintenanceLog maintenanceLog) {
+		this.maintenanceLog = maintenanceLog;
+	}
+ 
 
     @Override
 	public String toString() {

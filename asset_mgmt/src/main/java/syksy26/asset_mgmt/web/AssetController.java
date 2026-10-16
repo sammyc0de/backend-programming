@@ -12,17 +12,21 @@ import org.springframework.ui.Model;
 import syksy26.asset_mgmt.domain.Asset;
 import syksy26.asset_mgmt.domain.AssetRepository;
 import syksy26.asset_mgmt.domain.CategoryRepository;
+import syksy26.asset_mgmt.domain.MaintenanceLogRepository;
+
 
 @Controller
 public class AssetController {
   
     private AssetRepository repository;
     private CategoryRepository categoryRepository;
+    private MaintenanceLogRepository maintenanceLogRepository;
 
     //constructor
-    public AssetController(AssetRepository repository, CategoryRepository categoryRepository) {
+    public AssetController(AssetRepository repository, CategoryRepository categoryRepository, MaintenanceLogRepository maintenanceLogRepository) {
         this.repository = repository;
-        this.categoryRepository = categoryRepository;
+        this.categoryRepository = categoryRepository;  
+        this.maintenanceLogRepository = maintenanceLogRepository;   
     }
 
     //HTTP mapping annotations
@@ -52,8 +56,9 @@ public class AssetController {
     //HTTP request for editing item
     @RequestMapping(value = "/edit/{id}")
     public String edit(@PathVariable("id") Long assetId, Model model) {
-        model.addAttribute("asset", repository.findById(assetId));
+        model.addAttribute("asset",repository.findById(assetId).orElseThrow());
         model.addAttribute("categories", categoryRepository.findAll());
+        model.addAttribute("logs", maintenanceLogRepository.findAll());
         return "assetEdit";
     }
 

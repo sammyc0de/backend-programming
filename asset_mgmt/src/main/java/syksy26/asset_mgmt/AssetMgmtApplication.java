@@ -3,6 +3,9 @@ package syksy26.asset_mgmt;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.time.LocalDate;
+
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 
@@ -12,6 +15,8 @@ import syksy26.asset_mgmt.domain.AssetRepository;
 import syksy26.asset_mgmt.domain.Category;
 import syksy26.asset_mgmt.domain.CategoryRepository;
 
+import syksy26.asset_mgmt.domain.MaintenanceLog;
+import syksy26.asset_mgmt.domain.MaintenanceLogRepository;
 
 
 @SpringBootApplication
@@ -35,7 +40,7 @@ public class AssetMgmtApplication {
 	};
  */
 
-	public CommandLineRunner demo(AssetRepository assetRepository, CategoryRepository categoryRepository ) {
+	public CommandLineRunner demo(AssetRepository assetRepository, CategoryRepository categoryRepository, MaintenanceLogRepository maintenanceLogRepository) {
 	return (args) -> {
 
 			Category category1 = new Category("Computer");
@@ -48,12 +53,14 @@ public class AssetMgmtApplication {
 			categoryRepository.save(category3);
 			categoryRepository.save(category4);
 
-			assetRepository.save(new Asset("Dell", "Latitude", "i5 16GB 14 inch screen", "Win11", "DESKTOP-LSJFIA", category1));
+			MaintenanceLog maint1 = new MaintenanceLog("Computer reloaded", LocalDate.of(2026, 8, 24));
+			MaintenanceLog maint2 = new MaintenanceLog("SSD swapper", LocalDate.of(2026, 10, 8));
 
-			assetRepository.save(new Asset("Cisco", "C9300", "24 ports non POE", "IOS", "NA", category2));
-
-			assetRepository.save(new Asset("HP", "Proliant", "2xXeon, 256GB, 2TB ", "IOS", "NA", category3));
-
+		/* 	maintenanceLogRepository.save(maint1);
+			maintenanceLogRepository.save(maint2); */
+			
+			assetRepository.save(new Asset("Dell", "Latiude 5410", "i7 32GB", "Win11", "NA", category1, maint1));
+			assetRepository.save(new Asset("Dell", "Latiude 5440", "i5 16GB", "Win11", "NA", category1, maint2));
 			
 			
 		}; 
