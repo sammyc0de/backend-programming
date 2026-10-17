@@ -1,6 +1,7 @@
 package syksy26.asset_mgmt.web;
 
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -63,6 +64,7 @@ public class AssetController {
     }
 
     //HTTP request for delelte item
+    @PreAuthorize("hasAuthority('ADMIN')") //Only admins can delete items
     @RequestMapping(value = "/delete/{id}")
     public String delete(@PathVariable("id") Long assetId, Model model) {
         repository.deleteById(assetId);

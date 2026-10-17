@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"></html>
 	<head>
 		<title>Asset management</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -8,6 +8,16 @@
 	<body>
     <div class="ms-3"> 
         <h1>Asset management</h1>	
+        <div style="padding-bottom: 10px;"> Username:
+        <span sec:authentication="name">Name</span>
+    </div>
+   <div class="position-absolute top-0 end-0 p-3">
+    
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Sign Out" class="btn btn-sm btn-primary"/>
+    </form>
+</div>
+
         <a href="/add" class="btn btn-primary mb-3">Add asset</a>	
     <table class="table table-striped">
         <tr>
@@ -26,9 +36,16 @@
             <td th:text="${asset.description}"></td>
             <td th:text="${asset.OS}"></td>
             <td th:text="${asset.hostname}"></td>
-            <td th:text="${asset.category.name}"></td>     
-            <td><a th:href="@{/edit/{id}(id=${asset.id})}" class="btn btn-primary">Edit</a></td>       
-            <td><a th:href="@{/delete/{id}(id=${asset.id})}" class="btn btn-danger">Delete</a></td> 
+            <td th:text="${asset.category.name}"></td>  
+
+            <td sec:authorize="hasAuthority('USER')">
+                <a th:href="@{/edit/{id}(id=${asset.id})}" class="btn btn-primary">View</a>
+            </td>
+               
+            <td sec:authorize="hasAuthority('ADMIN')">
+                <a th:href="@{/edit/{id}(id=${asset.id})}" class="btn btn-primary">Edit</a>
+                <a th:href="@{/delete/{id}(id=${asset.id})}" class="btn btn-danger">Delete</a>
+            </td>
         </tr>
     </table> 
       

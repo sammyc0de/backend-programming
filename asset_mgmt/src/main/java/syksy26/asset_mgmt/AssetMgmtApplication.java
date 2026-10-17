@@ -5,7 +5,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.time.LocalDate;
 
-
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 
@@ -18,6 +17,12 @@ import syksy26.asset_mgmt.domain.CategoryRepository;
 import syksy26.asset_mgmt.domain.MaintenanceLog;
 import syksy26.asset_mgmt.domain.MaintenanceLogRepository;
 
+import syksy26.asset_mgmt.domain.User;
+import syksy26.asset_mgmt.domain.UserRepository;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 @SpringBootApplication
 public class AssetMgmtApplication {
@@ -25,6 +30,8 @@ public class AssetMgmtApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(AssetMgmtApplication.class, args);
 	}
+
+	private static final Logger log = LoggerFactory.getLogger(AssetMgmtApplication.class);
 
 	//Test data for db
 	@Bean
@@ -40,7 +47,7 @@ public class AssetMgmtApplication {
 	};
  */
 
-	public CommandLineRunner demo(AssetRepository assetRepository, CategoryRepository categoryRepository, MaintenanceLogRepository maintenanceLogRepository) {
+	public CommandLineRunner demo(AssetRepository assetRepository, CategoryRepository categoryRepository, MaintenanceLogRepository maintenanceLogRepository, UserRepository userRepository) {
 	return (args) -> {
 
 			Category category1 = new Category("Computer");
@@ -61,6 +68,17 @@ public class AssetMgmtApplication {
 			
 			assetRepository.save(new Asset("Dell", "Latiude 5410", "i7 32GB", "Win11", "NA", category1, maint1));
 			assetRepository.save(new Asset("Dell", "Latiude 5440", "i5 16GB", "Win11", "NA", category1, maint2));
+
+			// Create users
+			User user1 = new User("user", "$2a$10$1nzWR.4DwZRUm3rdhNCkSOklsyCphKp1Ydkq3lETnPx99oAa3F9Ti","user@assets.com", "USER");
+			User user2 = new User("admin", "$2a$10$3JleYlauJBlqY47vqfbj4.xAJ.0QIhpQW5A1U0r2fNQK7kXj3V.hq", "admin@assets.com", "ADMIN");
+			userRepository.save(user1);
+			userRepository.save(user2);
+			
+			log.info("fetch all users");
+			for (User user : userRepository.findAll()) {
+				log.info(user.toString());
+			}
 			
 			
 		}; 
