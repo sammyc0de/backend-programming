@@ -13,6 +13,7 @@ import jakarta.persistence.CascadeType;
 @Entity
 public class Asset {
 
+    //Create variables
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
@@ -22,6 +23,7 @@ public class Asset {
     private String OS;
     private String hostname;
 
+    //Annotations needed for relationships between asset and other entities
     @ManyToOne
     @JoinColumn(name = "categoryid")
     private Category category;
@@ -33,6 +35,8 @@ public class Asset {
     public Asset() {
         
     }
+
+    //Create asset object
 
     public Asset(String vendor, String model, String description, String OS, String hostname, Category category, MaintenanceLog maintenanceLog) {
         super();
@@ -46,6 +50,8 @@ public class Asset {
       
 
     }
+
+    //Get and set methods for getting and storing object data
 
     public Long getId() {
 		return id;
@@ -111,7 +117,7 @@ public class Asset {
 		this.maintenanceLog = maintenanceLog;
 	}
  
-
+    //Return string containing asset data
     @Override
 	public String toString() {
 		return "Asset id=" + id + ", vendor=" + vendor + ",model=" + model + ",description=" + description + ",OS=" + OS;

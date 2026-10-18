@@ -16,7 +16,7 @@ public class MaintenanceLog {
     @Id 
     @GeneratedValue(strategy=GenerationType.AUTO)
 	private Long maintenanceid;
-	@DateTimeFormat(pattern = "dd.MM.yyyy")
+	@DateTimeFormat(pattern = "dd.MM.yyyy") //Define date format to be used
     private LocalDate date;
 	private String description;
 	

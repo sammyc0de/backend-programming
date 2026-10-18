@@ -3,7 +3,7 @@ package syksy26.asset_mgmt.domain;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="Users")
+@Table(name="Users") //Use Users-table in database 
 public class User {
 
     @Id

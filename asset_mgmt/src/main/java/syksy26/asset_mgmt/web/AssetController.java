@@ -63,7 +63,7 @@ public class AssetController {
         return "assetEdit";
     }
 
-    //HTTP request for delelte item
+    //HTTP request for delete item
     @PreAuthorize("hasAuthority('ADMIN')") //Only admins can delete items
     @RequestMapping(value = "/delete/{id}")
     public String delete(@PathVariable("id") Long assetId, Model model) {
