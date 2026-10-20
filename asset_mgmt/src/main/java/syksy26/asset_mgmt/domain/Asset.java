@@ -9,6 +9,9 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.CascadeType;
 
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+
 
 @Entity
 public class Asset {
@@ -17,13 +20,18 @@ public class Asset {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
+    @NotEmpty(message = "Vendor field cannot be empty") //mandatory field
     private String vendor;
+    @NotEmpty(message = "Model field cannot be empty") //mandatory field
     private String model;
+    @NotEmpty(message = "Description field cannot be empty") //mandatory field
     private String description;
+    @NotEmpty(message = "Operating system field cannot be empty") //mandatory field
     private String OS;
     private String hostname;
 
     //Annotations needed for relationships between asset and other entities
+    @NotNull(message = "Category is required") //cat is mandatory
     @ManyToOne
     @JoinColumn(name = "categoryid")
     private Category category;

@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import jakarta.validation.Valid;
 
 import syksy26.asset_mgmt.domain.Asset;
 import syksy26.asset_mgmt.domain.AssetRepository;
@@ -48,12 +50,44 @@ public class AssetController {
     }
 
     //HTTP Post request, save new asset
-    @PostMapping("/save")
+
+    //Old post request without validation
+   /*  @PostMapping("/save")
     public String saveAsset(@ModelAttribute Asset asset) {
         repository.save(asset);
         return "redirect:/";
     }
-   
+    */
+
+    @PostMapping("/save")
+    public String saveAsset(@Valid @ModelAttribute Asset asset,
+        BindingResult bindingResult, Model model) {
+
+    if (bindingResult.hasErrors()) { //check if validation errors, empty fields etc
+        model.addAttribute("categories", categoryRepository.findAll()); //load categories if returned back to form due to validation errors
+        return "assetAdd"; // return to form if errors
+    }
+
+    repository.save(asset); //save asset if all ok
+    return "redirect:/"; //return back to home page
+    }
+
+    //For saving changes in edit page
+    @PostMapping("/savechanges")
+    public String saveChanges(@Valid @ModelAttribute Asset asset,
+        BindingResult bindingResult, Model model) {
+
+    if (bindingResult.hasErrors()) { //check if validation errors, empty fields etc
+        model.addAttribute("categories", categoryRepository.findAll()); //load categories if returned back to form due to validation errors
+        return "assetEdit"; // return to form if errors
+    }
+
+    repository.save(asset); //save asset if all ok
+    return "redirect:/"; //return back to home page
+    }
+
+
+
     //HTTP request for editing item
     @RequestMapping(value = "/edit/{id}")
     public String edit(@PathVariable("id") Long assetId, Model model) {

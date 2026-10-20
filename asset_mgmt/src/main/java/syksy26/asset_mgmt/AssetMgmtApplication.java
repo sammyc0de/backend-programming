@@ -35,18 +35,6 @@ public class AssetMgmtApplication {
 
 	//Test data for db
 	@Bean
-/* 	public CommandLineRunner data(AssetRepository repository) {
-	return (args) -> {
-	  repository.save(new Asset(
-			"Dell",
-			"Latitude",
-			"i5 16GB 14 inch screen",
-			"Win11",
-			"DESKTOP-LSJFIA"
-			));
-	};
- */
-
 	public CommandLineRunner demo(AssetRepository assetRepository, CategoryRepository categoryRepository, MaintenanceLogRepository maintenanceLogRepository, UserRepository userRepository) {
 	return (args) -> {
 

@@ -17,8 +17,11 @@
         <input type="submit" value="Sign Out" class="btn btn-sm btn-primary"/>
     </form>
 </div>
+            <td sec:authorize="hasAuthority('ADMIN')">
+                <a href="/add" class="btn btn-primary mb-3">Add asset</a>	
+            </td>
 
-        <a href="/add" class="btn btn-primary mb-3">Add asset</a>	
+        
     <table class="table table-striped">
         <tr>
             <th><b>Vendor</b></th>
